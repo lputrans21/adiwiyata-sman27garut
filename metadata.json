@@ -1,0 +1,6 @@
+{
+  "name": "Adiwiyata - Divisi Pengelolaan Sampah SMAN 27 GARUT",
+  "description": "Aplikasi Web & Google Apps Script untuk sistem pencatatan absensi, timbangan sampah, produk hasil daur ulang, dan laporan realtime Adiwiyata SMAN 27 Garut.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

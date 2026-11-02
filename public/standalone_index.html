@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adiwiyata - Divisi Pengelolaan Sampah SMAN 27 GARUT</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* 1. Animasi Tulisan Kerlap-Kerlip (Glowing Flashing Text Effect) */
+    @keyframes glowTextEffect {
+      0%, 100% {
+        text-shadow: 0 0 10px rgba(253, 224, 71, 0.95), 0 0 20px rgba(245, 158, 11, 0.8), 0 0 30px rgba(234, 179, 8, 0.6);
+        color: #fef08a;
+        transform: scale(1);
+      }
+      50% {
+        text-shadow: 0 0 4px rgba(254, 240, 138, 0.5), 0 0 10px rgba(250, 204, 21, 0.4);
+        color: #ffffff;
+        transform: scale(1.02);
+      }
+    }
+    .animate-glow-text {
+      display: inline-block;
+      animation: glowTextEffect 1.8s ease-in-out infinite alternate;
+    }
+
+    /* 2. Animasi Running Text (Marquee Effect) */
+    @keyframes marqueeSlide {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    .animate-marquee {
+      display: inline-flex;
+      white-space: nowrap;
+      animation: marqueeSlide 24s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #10b981;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-slate-100/80 text-slate-900 min-h-screen flex flex-col antialiased">
+
+  <!-- ======================================================== -->
+  <!-- 1. HEADER DENGAN RUNNING TEXT, LOGO SMAN 27 GARUT & GLOW -->
+  <!-- ======================================================== -->
+  <header class="bg-gradient-to-r from-emerald-900 via-teal-900 to-emerald-950 text-white shadow-xl sticky top-0 z-40 border-b border-emerald-600/40">
+    
+    <!-- Running Text Marquee: Kebersihan sebagian dari iman -->
+    <div class="bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 text-slate-950 text-xs font-black h-7 px-4 shadow-sm border-b border-amber-500 overflow-hidden flex items-center">
+      <div class="w-full overflow-hidden whitespace-nowrap">
+        <div class="animate-marquee items-center gap-8 text-[11px] sm:text-xs">
+          <span>🌿 "Kebersihan sebagian dari iman"</span>
+          <span class="text-amber-800">•</span>
+          <span>🏫 Adiwiyata Mandiri SMAN 27 GARUT - Sekolah Bersih, Hijau & Lestari</span>
+          <span class="text-amber-800">•</span>
+          <span>♻️ Pilah Sampah Jadi Berkah: Botol, Plastik Halus & Organik</span>
+          <span class="text-amber-800">•</span>
+          <span>🌿 "Kebersihan sebagian dari iman"</span>
+          <span class="text-amber-800">•</span>
+          <span>✨ Divisi Pengelolaan Sampah SMAN 27 GARUT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header Main Bar -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        
+        <!-- Logo SMAN 27 Garut Utuh & Proporsional + Glowing Welcome -->
+        <div class="flex items-center gap-3.5 sm:gap-4">
+          <div class="shrink-0 flex items-center justify-center p-1.5 bg-white/95 rounded-2xl shadow-md border-2 border-amber-300">
+            <!-- Logo SMAN 27 GARUT Utuh dan Proporsional -->
+            <img src="/logo_sman27_garut.svg" 
+                 alt="Logo SMAN 27 Garut" 
+                 class="h-14 sm:h-16 w-auto object-contain drop-shadow" 
+                 onerror="this.src='/sman27_garut_logo.jpg';">
+          </div>
+
+          <div>
+            <!-- Efek Animasi Tulisan Kerlap-Kerlip (Glowing Flashing) -->
+            <div class="flex items-center gap-1.5">
+              <span class="text-xs sm:text-sm font-black tracking-wide uppercase animate-glow-text">
+                ✨ Selamat Datang di Divisi Pengelolaan Sampah ✨
+              </span>
+            </div>
+            
+            <h1 class="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-white flex items-center gap-2 mt-0.5 font-heading">
+              SMAN 27 GARUT
+              <span class="hidden sm:inline-block text-[11px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-emerald-500/30 text-emerald-200 border border-emerald-400/30">
+                Adiwiyata Mandiri
+              </span>
+            </h1>
+            <p class="text-xs text-emerald-200/90 font-medium">
+              Sistem Terpadu Absensi, Timbangan Sampah & Produk Olahan Daur Ulang berbasis Google Apps Script
+            </p>
+          </div>
+        </div>
+
+        <!-- Widget Tanggal Online & Kontrol Admin -->
+        <div class="flex flex-wrap items-center gap-2.5 sm:gap-3">
+          <!-- Selector Tanggal/Kalender (Otomatis & Manual) -->
+          <div class="flex items-center gap-2 bg-emerald-950/80 border border-emerald-600/50 rounded-2xl p-1.5 sm:px-3 sm:py-1.5 shadow-inner">
+            <span class="text-xs font-semibold text-emerald-300 hidden sm:inline">📅 Tanggal:</span>
+            <input type="date" id="dateSelector" class="bg-emerald-900/90 text-white font-mono font-bold text-xs px-2.5 py-1 rounded-xl border border-emerald-500/60 focus:outline-none focus:ring-2 focus:ring-amber-400 cursor-pointer">
+            <button id="btnTodayDate" class="text-[10px] font-bold px-2 py-1 rounded-lg bg-amber-400 text-slate-950 shadow transition hover:bg-amber-300">
+              🟢 Hari Ini
+            </button>
+          </div>
+
+          <!-- Status Jam Realtime -->
+          <div class="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-950/60 border border-emerald-700/50 text-xs text-emerald-200 font-mono">
+            <span id="liveClock">00:00:00</span>
+          </div>
+
+          <!-- Tombol Login / Status Admin -->
+          <div id="adminStatusContainer">
+            <button onclick="openModal('modalAdminLogin')" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-800 hover:bg-emerald-700 border border-emerald-500/60 text-xs text-amber-200 hover:text-white font-bold transition shadow-sm">
+              <span>🛡️ Login Admin</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- 2. NAVIGASI SUB-MENU (TAB MENU 1 SAMPAI 6)                 -->
+    <!-- ======================================================== -->
+    <nav class="bg-white/95 border-b border-emerald-100 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex space-x-2 overflow-x-auto py-2.5 scrollbar-thin">
+          <button onclick="switchTab('tab-dashboard')" id="nav-dashboard" class="tab-btn active flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs sm:text-sm font-bold whitespace-nowrap bg-emerald-600 text-white shadow-md">
+            <span class="text-[10px] px-1.5 py-0.5 rounded-lg bg-black/20 text-white font-black">Menu 5</span>
+            <span>📊 Laporan Realtime</span>
+          </button>
+          <button onclick="switchTab('tab-absensi-umum')" id="nav-absensi-umum" class="tab-btn flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs sm:text-sm font-bold whitespace-nowrap bg-slate-50 text-slate-700 hover:bg-emerald-50 border border-slate-200">
+            <span class="text-[10px] px-1.5 py-0.5 rounded-lg bg-emerald-100 text-emerald-800 font-black">Menu 1</span>
+            <span>📋 Absensi Umum</span>
+          </button>
+          <button onclick="switchTab('tab-absensi-sub')" id="nav-absensi-sub" class="tab-btn flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs sm:text-sm font-bold whitespace-nowrap bg-slate-50 text-slate-700 hover:bg-emerald-50 border border-slate-200">
+            <span class="text-[10px] px-1.5 py-0.5 rounded-lg bg-emerald-100 text-emerald-800 font-black">Menu 2</span>
+            <span>🏷️ Absensi Sub Bidang</span>
+          </button>
+          <button onclick="switchTab('tab-timbangan')" id="nav-timbangan" class="tab-btn flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs sm:text-sm font-bold whitespace-nowrap bg-slate-50 text-slate-700 hover:bg-emerald-50 border border-slate-200">
+            <span class="text-[10px] px-1.5 py-0.5 rounded-lg bg-emerald-100 text-emerald-800 font-black">Menu 3</span>
+            <span>⚖️ Timbangan Sampah</span>
+          </button>
+          <button onclick="switchTab('tab-produk')" id="nav-produk" class="tab-btn flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs sm:text-sm font-bold whitespace-nowrap bg-slate-50 text-slate-700 hover:bg-emerald-50 border border-slate-200">
+            <span class="text-[10px] px-1.5 py-0.5 rounded-lg bg-emerald-100 text-emerald-800 font-black">Menu 4</span>
+            <span>🍶 Produk yang Dihasilkan</span>
+          </button>
+          <button onclick="switchTab('tab-admin')" id="nav-admin" class="tab-btn flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs sm:text-sm font-bold whitespace-nowrap bg-slate-50 text-slate-700 hover:bg-emerald-50 border border-slate-200">
+            <span class="text-[10px] px-1.5 py-0.5 rounded-lg bg-rose-100 text-rose-800 font-black">Menu 6</span>
+            <span>🛡️ Sub Menu Admin</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- 3. KONTEN UTAMA (SUB-MENU 1 SAMPAI 6)                      -->
+  <!-- ======================================================== -->
+  <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 flex-1 space-y-6">
+
+    <!-- 3D CARTOON HERO BANNER: SISWA SMA ADIWIYATA -->
+    <div class="bg-gradient-to-r from-emerald-800 via-teal-800 to-emerald-900 rounded-3xl p-5 sm:p-6 text-white shadow-xl border border-emerald-600/40 flex flex-col md:flex-row items-center gap-6">
+      <div class="flex-1 space-y-3">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-200 text-xs font-bold">
+          <span>🌿 Gerakan Peduli & Berbudaya Lingkungan Hidup di Sekolah (PBLHS)</span>
+        </div>
+        <h2 class="text-xl sm:text-2xl font-black text-white leading-tight font-heading">
+          Bersama Siswa-Siswi Hebat SMAN 27 GARUT, Pilah & Olah Sampah dari Sumbernya!
+        </h2>
+        <p className="text-xs sm:text-sm text-emerald-100/90 leading-relaxed">
+          Mewujudkan lingkungan sekolah bersih dan asri melalui pemilahan botol plastik, plastik halus, serta pengolahan sampah organik menjadi pupuk kompos dan air lindi.
+        </p>
+        <div class="flex flex-wrap gap-2 pt-1 text-xs">
+          <span class="px-2.5 py-1 rounded-lg bg-emerald-950/60 border border-emerald-500/40 font-semibold text-emerald-200">
+            🧴 Botol Plastik PET
+          </span>
+          <span class="px-2.5 py-1 rounded-lg bg-emerald-950/60 border border-emerald-500/40 font-semibold text-emerald-200">
+            🛍️ Plastik Halus
+          </span>
+          <span class="px-2.5 py-1 rounded-lg bg-emerald-950/60 border border-emerald-500/40 font-semibold text-emerald-200">
+            🍂 Pupuk Kompos & Air Lindi
+          </span>
+        </div>
+      </div>
+      <div class="shrink-0 w-full md:w-80 lg:w-96">
+        <img src="/sma_students_eco.jpg" 
+             alt="Ilustrasi Siswa SMA Adiwiyata SMAN 27 Garut" 
+             class="w-full h-48 sm:h-52 object-cover rounded-2xl shadow-2xl border-2 border-emerald-400/60"
+             onerror="this.src='https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&auto=format&fit=crop&q=80';">
+      </div>
+    </div>
+
+    <!-- TAB 5: LAPORAN REALTIME -->
+    <div id="tab-dashboard" class="tab-content space-y-6">
+      <!-- Filter Bar Laporan -->
+      <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-emerald-100 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <div class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md inline-block mb-1">
+            Menu 5: Laporan Realtime
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 font-heading">Rekapitulasi Operasional Adiwiyata Realtime</h3>
+          <p class="text-xs text-slate-500">Agregasi data dari seluruh sub-menu transaksi</p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <div class="inline-flex rounded-xl bg-slate-100 p-1 border border-slate-200 text-xs font-semibold">
+            <button onclick="setReportPeriod('harian')" id="btn-period-harian" class="period-btn px-3 py-1.5 rounded-lg bg-emerald-600 text-white shadow-sm">Harian</button>
+            <button onclick="setReportPeriod('mingguan')" id="btn-period-mingguan" class="period-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900">Mingguan</button>
+            <button onclick="setReportPeriod('bulanan')" id="btn-period-bulanan" class="period-btn px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900">Bulanan</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI Summary Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Sampah Masuk -->
+        <div class="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 rounded-2xl p-5 shadow-sm">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="text-xs font-bold uppercase text-emerald-800">Total Sampah Masuk</span>
+              <div class="mt-2 text-3xl font-black font-mono text-emerald-950" id="cardTotalSampah">93.5 <span class="text-sm font-bold text-emerald-700">KG</span></div>
+              <p class="text-xs text-emerald-600 mt-1" id="cardSampahDesc">Dari penimbangan hari ini</p>
+            </div>
+            <span class="text-2xl p-2 bg-emerald-100 rounded-xl">⚖️</span>
+          </div>
+        </div>
+
+        <!-- Pupuk Kompos -->
+        <div class="bg-gradient-to-br from-amber-50 to-yellow-50 border border-amber-200 rounded-2xl p-5 shadow-sm">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="text-xs font-bold uppercase text-amber-800">Pupuk Kompos Padat</span>
+              <div class="mt-2 text-3xl font-black font-mono text-amber-950" id="cardTotalKompos">80 <span class="text-sm font-bold text-amber-700">KG</span></div>
+              <p class="text-xs text-amber-700/80 mt-1">Hasil biopori & komposter</p>
+            </div>
+            <span class="text-2xl p-2 bg-amber-100 rounded-xl">🌱</span>
+          </div>
+        </div>
+
+        <!-- Air Lindi -->
+        <div class="bg-gradient-to-br from-blue-50 to-sky-50 border border-blue-200 rounded-2xl p-5 shadow-sm">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="text-xs font-bold uppercase text-blue-800">Pupuk Cair Air Lindi</span>
+              <div class="mt-2 text-3xl font-black font-mono text-blue-950" id="cardTotalLindi">25 <span class="text-sm font-bold text-blue-700">Liter</span></div>
+              <p class="text-xs text-blue-600 mt-1">Fermentasi sisa makanan</p>
+            </div>
+            <span class="text-2xl p-2 bg-blue-100 rounded-xl">💧</span>
+          </div>
+        </div>
+
+        <!-- Kehadiran Petugas -->
+        <div class="bg-gradient-to-br from-purple-50 to-indigo-50 border border-purple-200 rounded-2xl p-5 shadow-sm">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="text-xs font-bold uppercase text-purple-800">Kehadiran Petugas</span>
+              <div class="mt-2 text-3xl font-black font-mono text-purple-950" id="cardKehadiran">80% <span class="text-xs font-bold text-purple-700">(4 Hadir)</span></div>
+              <p class="text-xs text-purple-600 mt-1" id="cardKehadiranDesc">1 Izin • 0 Sakit</p>
+            </div>
+            <span class="text-2xl p-2 bg-purple-100 rounded-xl">👥</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 1: ABSENSI UMUM -->
+    <div id="tab-absensi-umum" class="tab-content hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Form -->
+        <div class="lg:col-span-5 bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+          <div class="flex items-center gap-2 pb-3 mb-4 border-b border-slate-100">
+            <span class="text-xl p-2 bg-blue-100 rounded-xl">📋</span>
+            <div>
+              <h3 class="font-bold text-slate-900 text-base font-heading">Menu 1: Absensi Kehadiran Pegawai Umum</h3>
+              <p class="text-xs text-slate-500">Sheet: "Absensi_Umum"</p>
+            </div>
+          </div>
+
+          <form onsubmit="handleSaveAbsensiUmum(event)" class="space-y-4 text-xs">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Nama Pegawai: *</label>
+              <select id="absensiPegawaiSelect" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-white" required>
+                <!-- Populated via JS -->
+              </select>
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Status Kehadiran:</label>
+              <div class="grid grid-cols-4 gap-2">
+                <button type="button" onclick="selectAttendanceStatus('Hadir')" id="status-btn-Hadir" class="status-choice-btn py-2 px-1 text-center rounded-xl font-bold border bg-emerald-600 text-white border-emerald-600">Hadir</button>
+                <button type="button" onclick="selectAttendanceStatus('Izin')" id="status-btn-Izin" class="status-choice-btn py-2 px-1 text-center rounded-xl font-bold border bg-slate-50 text-slate-700 border-slate-200">Izin</button>
+                <button type="button" onclick="selectAttendanceStatus('Sakit')" id="status-btn-Sakit" class="status-choice-btn py-2 px-1 text-center rounded-xl font-bold border bg-slate-50 text-slate-700 border-slate-200">Sakit</button>
+                <button type="button" onclick="selectAttendanceStatus('Alpa')" id="status-btn-Alpa" class="status-choice-btn py-2 px-1 text-center rounded-xl font-bold border bg-slate-50 text-slate-700 border-slate-200">Alpa</button>
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Catatan Kehadiran:</label>
+              <textarea id="absensiCatatan" rows="3" placeholder="Piket area komposting timur..." class="w-full px-3 py-2 rounded-xl border border-slate-300"></textarea>
+            </div>
+
+            <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition">
+              Simpan Absensi Umum
+            </button>
+          </form>
+        </div>
+
+        <!-- Table -->
+        <div class="lg:col-span-7 bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col">
+          <h3 class="font-bold text-slate-900 text-base mb-3 font-heading">Daftar Presensi Umum</h3>
+          <div class="overflow-x-auto flex-1 border border-slate-100 rounded-xl">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200">
+                <tr>
+                  <th class="py-2.5 px-3">Tanggal/ID</th>
+                  <th class="py-2.5 px-3">Nama Pegawai</th>
+                  <th class="py-2.5 px-3">Status</th>
+                  <th class="py-2.5 px-3">Catatan</th>
+                  <th class="py-2.5 px-3">Catatan Admin</th>
+                </tr>
+              </thead>
+              <tbody id="tableAbsensiUmumBody" class="divide-y divide-slate-100">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: ABSENSI SUB BIDANG -->
+    <div id="tab-absensi-sub" class="tab-content hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Form -->
+        <div class="lg:col-span-5 bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+          <div class="flex items-center gap-2 pb-3 mb-4 border-b border-slate-100">
+            <span class="text-xl p-2 bg-teal-100 rounded-xl">🏷️</span>
+            <div>
+              <h3 class="font-bold text-slate-900 text-base font-heading">Menu 2: Absensi Sub Bidang</h3>
+              <p class="text-xs text-slate-500">Sheet: "Absensi_SubBidang"</p>
+            </div>
+          </div>
+
+          <form onsubmit="handleSaveAbsensiSub(event)" class="space-y-4 text-xs">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Nama Pegawai: *</label>
+              <select id="subPegawaiSelect" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-white" required>
+                <!-- Populated via JS -->
+              </select>
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Bidang Pemilahan: *</label>
+              <select id="subBidangSelect" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-white" required>
+                <option value="Pengumpulan Sampah Botol">Pengumpulan Sampah Botol</option>
+                <option value="Plastik Halus">Plastik Halus</option>
+                <option value="Organik">Organik</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Status Penugasan:</label>
+              <input type="text" id="subStatusInput" value="Aktif Bekerja" class="w-full px-3 py-2 rounded-xl border border-slate-300">
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Catatan Kerja:</label>
+              <textarea id="subCatatan" rows="2" placeholder="Fokus pencopotan label botol..." class="w-full px-3 py-2 rounded-xl border border-slate-300"></textarea>
+            </div>
+
+            <button type="submit" class="w-full py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl shadow transition">
+              Simpan Absensi Sub-Bidang
+            </button>
+          </form>
+        </div>
+
+        <!-- Table -->
+        <div class="lg:col-span-7 bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col">
+          <h3 class="font-bold text-slate-900 text-base mb-3 font-heading">Daftar Penugasan Sub-Bidang</h3>
+          <div class="overflow-x-auto flex-1 border border-slate-100 rounded-xl">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200">
+                <tr>
+                  <th class="py-2.5 px-3">Tanggal/ID</th>
+                  <th class="py-2.5 px-3">Nama Pegawai</th>
+                  <th class="py-2.5 px-3">Bidang</th>
+                  <th class="py-2.5 px-3">Status</th>
+                  <th class="py-2.5 px-3">Catatan</th>
+                </tr>
+              </thead>
+              <tbody id="tableAbsensiSubBody" class="divide-y divide-slate-100">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: TIMBANGAN SAMPAH -->
+    <div id="tab-timbangan" class="tab-content hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Scale Simulator & Form -->
+        <div class="lg:col-span-5 space-y-4">
+          <!-- Digital Scale Display Box -->
+          <div class="bg-slate-950 rounded-2xl p-5 text-white shadow-xl border border-slate-800">
+            <div class="flex justify-between items-center text-xs pb-2 border-b border-slate-800 text-emerald-400 font-bold">
+              <span>⚖️ TIMBANGAN DIGITAL ADIWIYATA</span>
+              <span class="font-mono text-[10px] bg-emerald-950 border border-emerald-800 px-2 py-0.5 rounded">ONLINE</span>
+            </div>
+            
+            <div class="my-4 bg-black/90 p-4 rounded-xl border border-emerald-900 flex justify-between items-center shadow-inner">
+              <div>
+                <span class="text-[10px] text-slate-500 font-mono block">BERAT TIMBANGAN</span>
+                <span id="digitalWeightDisplay" class="font-mono text-5xl font-black text-emerald-400">5.00</span>
+              </div>
+              <span class="text-2xl font-mono font-bold text-emerald-500/80">KG</span>
+            </div>
+
+            <div class="flex gap-2">
+              <button type="button" onclick="scaleTare()" class="px-3 py-1.5 rounded-lg bg-rose-950 border border-rose-800 text-rose-300 font-bold text-xs">Tare / 0</button>
+              <button type="button" onclick="scaleAdd(0.5)" class="flex-1 py-1.5 rounded-lg bg-slate-800 text-slate-200 font-bold text-xs">+0.5</button>
+              <button type="button" onclick="scaleAdd(1)" class="flex-1 py-1.5 rounded-lg bg-slate-800 text-slate-200 font-bold text-xs">+1.0</button>
+              <button type="button" onclick="scaleAdd(5)" class="flex-1 py-1.5 rounded-lg bg-slate-800 text-slate-200 font-bold text-xs">+5.0</button>
+            </div>
+          </div>
+
+          <!-- Form Input -->
+          <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+            <form onsubmit="handleSaveTimbangan(event)" class="space-y-4 text-xs">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Jenis Sampah: *</label>
+                <select id="timbanganJenisSelect" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-white" required>
+                  <option value="Organik">Organik</option>
+                  <option value="Botol">Botol</option>
+                  <option value="Plastik Halus">Plastik Halus</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Berat Sampah (KG): *</label>
+                <input type="number" step="0.1" id="timbanganBeratInput" value="5" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 font-mono font-bold text-sm" required>
+              </div>
+
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Petugas Penimbang: *</label>
+                <select id="timbanganPetugasSelect" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-white" required>
+                  <!-- Populated via JS -->
+                </select>
+              </div>
+
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Catatan / Asal Sumber:</label>
+                <textarea id="timbanganCatatan" rows="2" placeholder="Dari taman depan & kantin..." class="w-full px-3 py-2 rounded-xl border border-slate-300"></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl shadow transition">
+                Simpan Record Timbangan
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="lg:col-span-7 bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col">
+          <h3 class="font-bold text-slate-900 text-base mb-3 font-heading">Riwayat Timbangan Sampah Masuk</h3>
+          <div class="overflow-x-auto flex-1 border border-slate-100 rounded-xl">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200">
+                <tr>
+                  <th class="py-2.5 px-3">Tanggal/ID</th>
+                  <th class="py-2.5 px-3">Jenis Sampah</th>
+                  <th class="py-2.5 px-3">Berat (KG)</th>
+                  <th class="py-2.5 px-3">Petugas</th>
+                  <th class="py-2.5 px-3">Catatan</th>
+                </tr>
+              </thead>
+              <tbody id="tableTimbanganBody" class="divide-y divide-slate-100">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: PRODUK YANG DIHASILKAN -->
+    <div id="tab-produk" class="tab-content hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Form -->
+        <div class="lg:col-span-5 bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+          <div class="flex items-center gap-2 pb-3 mb-4 border-b border-slate-100">
+            <span class="text-xl p-2 bg-purple-100 rounded-xl">🍶</span>
+            <div>
+              <h3 class="font-bold text-slate-900 text-base font-heading">Menu 4: Produk yang Dihasilkan</h3>
+              <p class="text-xs text-slate-500">Sheet: "Produk_Hasil"</p>
+            </div>
+          </div>
+
+          <form onsubmit="handleSaveProduk(event)" class="space-y-4 text-xs">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Jenis Produk Olahan: *</label>
+              <select id="produkJenisSelect" onchange="handleProductTypeChange()" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-white" required>
+                <option value="Air lindi">Air lindi (Pupuk Cair)</option>
+                <option value="Pupuk Kompos" selected>Pupuk Kompos (Padat)</option>
+                <option value="Barang Daur Ulang">Barang Daur Ulang (Kerajinan/Pot)</option>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Jumlah: *</label>
+                <input type="number" step="0.5" id="produkJumlahInput" value="10" class="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono font-bold" required>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Pilihan Satuan: *</label>
+                <select id="produkSatuanSelect" class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white" required>
+                  <option value="Liter">Liter</option>
+                  <option value="Kilogram" selected>Kilogram</option>
+                  <option value="Pcs">Pcs</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Petugas Penanggung Jawab: *</label>
+              <select id="produkPetugasSelect" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-white" required>
+                <!-- Populated via JS -->
+              </select>
+            </div>
+
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Catatan Kualitas / Hasil Olahan:</label>
+              <textarea id="produkCatatan" rows="2" placeholder="Kompos matang diayak siap kemas..." class="w-full px-3 py-2 rounded-xl border border-slate-300"></textarea>
+            </div>
+
+            <button type="submit" class="w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl shadow transition">
+              Simpan Produk Daur Ulang
+            </button>
+          </form>
+        </div>
+
+        <!-- Table -->
+        <div class="lg:col-span-7 bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col">
+          <h3 class="font-bold text-slate-900 text-base mb-3 font-heading">Riwayat Produk Olahan Adiwiyata</h3>
+          <div class="overflow-x-auto flex-1 border border-slate-100 rounded-xl">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200">
+                <tr>
+                  <th class="py-2.5 px-3">Tanggal/ID</th>
+                  <th class="py-2.5 px-3">Jenis Produk</th>
+                  <th class="py-2.5 px-3">Jumlah</th>
+                  <th class="py-2.5 px-3">Petugas</th>
+                  <th class="py-2.5 px-3">Catatan</th>
+                </tr>
+              </thead>
+              <tbody id="tableProdukBody" class="divide-y divide-slate-100">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: SUB MENU ADMIN -->
+    <div id="tab-admin" class="tab-content hidden space-y-6">
+      <div id="adminLockedView" class="max-w-md mx-auto bg-white p-6 rounded-3xl shadow-lg border border-rose-200 text-center">
+        <span class="text-4xl p-3 bg-rose-100 rounded-2xl inline-block mb-3">🔒</span>
+        <h3 class="text-xl font-bold text-slate-900 font-heading">Menu 6: Sub Menu Admin Terproteksi</h3>
+        <p class="text-xs text-slate-500 mt-1 mb-4">Masukkan kode akses admin untuk mengelola Master Pegawai dan koreksi transaksi.</p>
+        
+        <form onsubmit="handleVerifyAdmin(event)" class="space-y-3 text-left">
+          <input type="password" id="adminPasswordInput" placeholder="Masukkan password admin..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-rose-500">
+          <div id="adminPassError" class="text-xs text-rose-600 font-semibold hidden">Password salah! Silakan coba lagi.</div>
+          <p class="text-[11px] text-slate-400">Petunjuk password resmi: <code class="font-bold text-slate-700">dead4left</code></p>
+          <button type="submit" class="w-full py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl shadow transition text-xs">
+            Verifikasi Kode Akses
+          </button>
+        </form>
+      </div>
+
+      <div id="adminUnlockedView" class="hidden space-y-6">
+        <div class="bg-slate-900 text-white rounded-2xl p-5 flex justify-between items-center border border-amber-400/40">
+          <div>
+            <span class="text-xs px-2 py-0.5 rounded bg-amber-400 text-slate-950 font-bold uppercase">Admin Aktif</span>
+            <h3 class="text-lg font-bold mt-1 font-heading">Panel Administrator Adiwiyata SMAN 27 GARUT</h3>
+            <p class="text-xs text-slate-400">Hak Akses: Kelola Master Pegawai, Edit/Hapus Record & Catatan Khusus Admin</p>
+          </div>
+          <button onclick="logoutAdmin()" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 rounded-xl text-xs font-bold transition">
+            Logout Admin
+          </button>
+        </div>
+
+        <!-- Master Pegawai Manager -->
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+          <h4 class="font-bold text-slate-900 text-base mb-3 font-heading">👥 Kelola Master Pegawai (Sheet "Master_Pegawai")</h4>
+          <div class="flex flex-col sm:flex-row gap-2 mb-4">
+            <input type="text" id="newPegawaiIdInput" placeholder="ID Pegawai (misal: PEG-006)" class="px-3 py-2 rounded-xl border border-slate-300 text-xs w-44">
+            <input type="text" id="newPegawaiNameInput" placeholder="Nama Lengkap Pegawai..." class="flex-1 px-3 py-2 rounded-xl border border-slate-300 text-xs">
+            <button onclick="handleAddPegawai()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition">
+              + Tambah Pegawai
+            </button>
+          </div>
+
+          <div class="overflow-x-auto border border-slate-200 rounded-xl">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-50 font-bold text-slate-700 border-b border-slate-200">
+                <tr>
+                  <th class="py-2.5 px-3">ID Pegawai</th>
+                  <th class="py-2.5 px-3">Nama Pegawai</th>
+                  <th class="py-2.5 px-3 text-right">Aksi Admin</th>
+                </tr>
+              </thead>
+              <tbody id="tableMasterPegawaiBody" class="divide-y divide-slate-100">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="mt-auto bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div>
+        <strong>SMAN 27 GARUT</strong> • Divisi Pengelolaan Sampah Sekolah Adiwiyata Mandiri
+      </div>
+      <div>
+        Kode Akses Admin: <code class="bg-slate-100 font-mono text-emerald-800 font-bold px-1 rounded">dead4left</code>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL ADMIN LOGIN QUICK TRIGGER -->
+  <div id="modalAdminLogin" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl relative text-center">
+      <button onclick="closeModal('modalAdminLogin')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-lg">&times;</button>
+      <span class="text-3xl p-3 bg-amber-100 rounded-2xl inline-block mb-3">🔑</span>
+      <h3 class="text-lg font-bold text-slate-900 font-heading">Otentikasi Administrator</h3>
+      <p class="text-xs text-slate-500 mb-4">Password default: <code class="font-bold text-slate-800">dead4left</code></p>
+      
+      <form onsubmit="handleModalVerifyAdmin(event)" class="space-y-3 text-left">
+        <input type="password" id="modalAdminPassInput" placeholder="Password admin..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500" required>
+        <button type="submit" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition">
+          Buka Hak Akses Admin
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 4. JAVASCRIPT LOGIC (CRUD, REALTIME STATS, ADMIN)         -->
+  <!-- ======================================================== -->
+  <script>
+    // Global Constants
+    const ADMIN_PASSWORD = "dead4left";
+    let isAdminAuthenticated = false;
+    let currentAttendanceStatus = "Hadir";
+    let currentScaleWeight = 5.0;
+
+    // Database In-Memory State & LocalStorage
+    let db = {
+      pegawai: [
+        { ID_Pegawai: "PEG-001", Nama_Pegawai: "Drs. Lucy Ega Suganda" },
+        { ID_Pegawai: "PEG-002", Nama_Pegawai: "Asep Sunandar, S.Pd" },
+        { ID_Pegawai: "PEG-003", Nama_Pegawai: "Siti Nurhaliza, M.Pd" },
+        { ID_Pegawai: "PEG-004", Nama_Pegawai: "Rian Hidayat" },
+        { ID_Pegawai: "PEG-005", Nama_Pegawai: "Dewi Sartika" }
+      ],
+      absensiUmum: [
+        { ID: "ABS-UMUM-1001", Date: getTodayStr(), Nama_Pegawai: "Drs. Lucy Ega Suganda", Status_Kehadiran: "Hadir", Catatan: "Koordinator apel pagi Adiwiyata", Catatan_Khusus_Admin: "Terverifikasi hadir memimpin" },
+        { ID: "ABS-UMUM-1002", Date: getTodayStr(), Nama_Pegawai: "Asep Sunandar, S.Pd", Status_Kehadiran: "Hadir", Catatan: "Piket komposting timur", Catatan_Khusus_Admin: "" },
+        { ID: "ABS-UMUM-1003", Date: getTodayStr(), Nama_Pegawai: "Rian Hidayat", Status_Kehadiran: "Hadir", Catatan: "Pemilahan plastik kelas X", Catatan_Khusus_Admin: "" },
+        { ID: "ABS-UMUM-1004", Date: getTodayStr(), Nama_Pegawai: "Dewi Sartika", Status_Kehadiran: "Hadir", Catatan: "Daur ulang botol", Catatan_Khusus_Admin: "" },
+        { ID: "ABS-UMUM-1005", Date: getTodayStr(), Nama_Pegawai: "Siti Nurhaliza, M.Pd", Status_Kehadiran: "Izin", Catatan: "Dinas luar lomba Adiwiyata", Catatan_Khusus_Admin: "Surat tugas ada" }
+      ],
+      absensiSub: [
+        { ID: "ABS-SUB-2001", Date: getTodayStr(), Nama_Pegawai: "Dewi Sartika", Bidang: "Pengumpulan Sampah Botol", Status: "Aktif Bekerja", Catatan: "Fokus botol plastik PET" },
+        { ID: "ABS-SUB-2002", Date: getTodayStr(), Nama_Pegawai: "Rian Hidayat", Bidang: "Plastik Halus", Status: "Aktif Bekerja", Catatan: "Kantong plastik kantin" },
+        { ID: "ABS-SUB-2003", Date: getTodayStr(), Nama_Pegawai: "Asep Sunandar, S.Pd", Bidang: "Organik", Status: "Aktif Bekerja", Catatan: "Pencacahan daun kering" }
+      ],
+      timbangan: [
+        { ID: "TMB-3001", Date: getTodayStr(), Jenis_Sampah: "Organik", Berat_KG: 42.5, Petugas: "Asep Sunandar, S.Pd", Catatan: "Daun gugur taman depan" },
+        { ID: "TMB-3002", Date: getTodayStr(), Jenis_Sampah: "Botol", Berat_KG: 14.8, Petugas: "Dewi Sartika", Catatan: "Botol air mineral kelas X & XI" },
+        { ID: "TMB-3003", Date: getTodayStr(), Jenis_Sampah: "Plastik Halus", Berat_KG: 8.2, Petugas: "Rian Hidayat", Catatan: "Kantong kresek kantin" },
+        { ID: "TMB-3004", Date: getTodayStr(), Jenis_Sampah: "Organik", Berat_KG: 28.0, Petugas: "Asep Sunandar, S.Pd", Catatan: "Sisa rumput lapangan" }
+      ],
+      produk: [
+        { ID: "PRD-4001", Date: getTodayStr(), Jenis_Produk: "Air lindi", Satuan: "Liter", Jumlah: 25, Petugas: "Asep Sunandar, S.Pd", Catatan: "Pupuk cair dari drum aerob" },
+        { ID: "PRD-4002", Date: getTodayStr(), Jenis_Produk: "Pupuk Kompos", Satuan: "Kilogram", Jumlah: 80, Petugas: "Asep Sunandar, S.Pd", Catatan: "Kompos matang diayak siap pakai" },
+        { ID: "PRD-4003", Date: getTodayStr(), Jenis_Produk: "Barang Daur Ulang", Satuan: "Pcs", Jumlah: 15, Petugas: "Dewi Sartika", Catatan: "Pot tanaman hidroponik botol" }
+      ]
+    };
+
+    // Helper Date
+    function getTodayStr() {
+      const d = new Date();
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      return `${y}-${m}-${day}`;
+    }
+
+    // Init App
+    window.addEventListener("DOMContentLoaded", () => {
+      // 1. Set Date Selector
+      const dateSelector = document.getElementById("dateSelector");
+      dateSelector.value = getTodayStr();
+      document.getElementById("btnTodayDate").addEventListener("click", () => {
+        dateSelector.value = getTodayStr();
+        renderAllTables();
+      });
+      dateSelector.addEventListener("change", () => renderAllTables());
+
+      // 2. Realtime Clock
+      setInterval(() => {
+        const now = new Date();
+        document.getElementById("liveClock").innerText = now.toLocaleTimeString("id-ID");
+      }, 1000);
+
+      // 3. Render Tables & Options
+      populatePegawaiDropdowns();
+      renderAllTables();
+    });
+
+    // Populate Dropdowns
+    function populatePegawaiDropdowns() {
+      const selects = [
+        document.getElementById("absensiPegawaiSelect"),
+        document.getElementById("subPegawaiSelect"),
+        document.getElementById("timbanganPetugasSelect"),
+        document.getElementById("produkPetugasSelect")
+      ];
+      selects.forEach(sel => {
+        if (!sel) return;
+        sel.innerHTML = '<option value="">-- Pilih Pegawai --</option>' + 
+          db.pegawai.map(p => `<option value="${p.Nama_Pegawai}">${p.Nama_Pegawai} (${p.ID_Pegawai})</option>`).join('');
+      });
+    }
+
+    // Tab Navigation
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-content").forEach(el => el.classList.add("hidden"));
+      const target = document.getElementById(tabId);
+      if (target) target.classList.remove("hidden");
+
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.classList.remove("bg-emerald-600", "text-white", "shadow-md");
+        btn.classList.add("bg-slate-50", "text-slate-700");
+      });
+      const activeBtn = document.getElementById("nav-" + tabId.replace("tab-", ""));
+      if (activeBtn) {
+        activeBtn.classList.remove("bg-slate-50", "text-slate-700");
+        activeBtn.classList.add("bg-emerald-600", "text-white", "shadow-md");
+      }
+    }
+
+    // Attendance Status Selector
+    function selectAttendanceStatus(st) {
+      currentAttendanceStatus = st;
+      document.querySelectorAll(".status-choice-btn").forEach(b => {
+        b.className = "status-choice-btn py-2 px-1 text-center rounded-xl font-bold border bg-slate-50 text-slate-700 border-slate-200";
+      });
+      const active = document.getElementById("status-btn-" + st);
+      if (active) {
+        active.className = "status-choice-btn py-2 px-1 text-center rounded-xl font-bold border bg-emerald-600 text-white border-emerald-600";
+      }
+    }
+
+    // Scale Controls
+    function scaleAdd(inc) {
+      currentScaleWeight = Math.round((currentScaleWeight + inc) * 10) / 10;
+      document.getElementById("digitalWeightDisplay").innerText = currentScaleWeight.toFixed(2);
+      document.getElementById("timbanganBeratInput").value = currentScaleWeight;
+    }
+    function scaleTare() {
+      currentScaleWeight = 0;
+      document.getElementById("digitalWeightDisplay").innerText = "0.00";
+      document.getElementById("timbanganBeratInput").value = 0;
+    }
+
+    // Product Type Change auto-sets Satuan
+    function handleProductTypeChange() {
+      const type = document.getElementById("produkJenisSelect").value;
+      const satuan = document.getElementById("produkSatuanSelect");
+      if (type === "Air lindi") satuan.value = "Liter";
+      else if (type === "Pupuk Kompos") satuan.value = "Kilogram";
+      else if (type === "Barang Daur Ulang") satuan.value = "Pcs";
+    }
+
+    // Form Submissions (Create CRUD)
+    function handleSaveAbsensiUmum(e) {
+      e.preventDefault();
+      const nama = document.getElementById("absensiPegawaiSelect").value;
+      const cat = document.getElementById("absensiCatatan").value;
+      const date = document.getElementById("dateSelector").value;
+      if (!nama) return alert("Pilih nama pegawai!");
+
+      db.absensiUmum.unshift({
+        ID: "ABS-UMUM-" + Math.floor(1000 + Math.random()*9000),
+        Date: date,
+        Nama_Pegawai: nama,
+        Status_Kehadiran: currentAttendanceStatus,
+        Catatan: cat || "-",
+        Catatan_Khusus_Admin: ""
+      });
+      document.getElementById("absensiCatatan").value = "";
+      alert("Absensi Umum berhasil disimpan!");
+      renderAllTables();
+    }
+
+    function handleSaveAbsensiSub(e) {
+      e.preventDefault();
+      const nama = document.getElementById("subPegawaiSelect").value;
+      const bidang = document.getElementById("subBidangSelect").value;
+      const status = document.getElementById("subStatusInput").value;
+      const cat = document.getElementById("subCatatan").value;
+      const date = document.getElementById("dateSelector").value;
+      if (!nama) return alert("Pilih nama pegawai!");
+
+      db.absensiSub.unshift({
+        ID: "ABS-SUB-" + Math.floor(1000 + Math.random()*9000),
+        Date: date,
+        Nama_Pegawai: nama,
+        Bidang: bidang,
+        Status: status,
+        Catatan: cat || "-"
+      });
+      document.getElementById("subCatatan").value = "";
+      alert("Absensi Sub-Bidang (" + bidang + ") tersimpan!");
+      renderAllTables();
+    }
+
+    function handleSaveTimbangan(e) {
+      e.preventDefault();
+      const jenis = document.getElementById("timbanganJenisSelect").value;
+      const berat = parseFloat(document.getElementById("timbanganBeratInput").value);
+      const petugas = document.getElementById("timbanganPetugasSelect").value;
+      const cat = document.getElementById("timbanganCatatan").value;
+      const date = document.getElementById("dateSelector").value;
+      if (!petugas || isNaN(berat) || berat <= 0) return alert("Isi data penimbangan dengan benar!");
+
+      db.timbangan.unshift({
+        ID: "TMB-" + Math.floor(1000 + Math.random()*9000),
+        Date: date,
+        Jenis_Sampah: jenis,
+        Berat_KG: berat,
+        Petugas: petugas,
+        Catatan: cat || "-"
+      });
+      document.getElementById("timbanganCatatan").value = "";
+      alert("Timbangan " + jenis + " (" + berat + " KG) berhasil disimpan!");
+      renderAllTables();
+    }
+
+    function handleSaveProduk(e) {
+      e.preventDefault();
+      const jenis = document.getElementById("produkJenisSelect").value;
+      const jml = parseFloat(document.getElementById("produkJumlahInput").value);
+      const satuan = document.getElementById("produkSatuanSelect").value;
+      const petugas = document.getElementById("produkPetugasSelect").value;
+      const cat = document.getElementById("produkCatatan").value;
+      const date = document.getElementById("dateSelector").value;
+      if (!petugas || isNaN(jml) || jml <= 0) return alert("Isi data produk hasil dengan benar!");
+
+      db.produk.unshift({
+        ID: "PRD-" + Math.floor(1000 + Math.random()*9000),
+        Date: date,
+        Jenis_Produk: jenis,
+        Satuan: satuan,
+        Jumlah: jml,
+        Petugas: petugas,
+        Catatan: cat || "-"
+      });
+      document.getElementById("produkCatatan").value = "";
+      alert("Produk " + jenis + " (" + jml + " " + satuan + ") berhasil disimpan!");
+      renderAllTables();
+    }
+
+    // Render All Tables
+    function renderAllTables() {
+      // 1. Absensi Umum Table
+      document.getElementById("tableAbsensiUmumBody").innerHTML = db.absensiUmum.map(r => `
+        <tr class="hover:bg-slate-50">
+          <td class="py-2.5 px-3 font-semibold text-slate-800">${r.Date}<br><span class="text-[10px] text-slate-400 font-mono">${r.ID}</span></td>
+          <td class="py-2.5 px-3 font-bold text-slate-900">${r.Nama_Pegawai}</td>
+          <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${r.Status_Kehadiran==='Hadir'?'bg-emerald-100 text-emerald-800':'bg-blue-100 text-blue-800'}">${r.Status_Kehadiran}</span></td>
+          <td class="py-2.5 px-3 text-slate-600">${r.Catatan}</td>
+          <td class="py-2.5 px-3 text-amber-800 font-medium">${r.Catatan_Khusus_Admin || '-'}</td>
+        </tr>
+      `).join('');
+
+      // 2. Absensi Sub-Bidang Table
+      document.getElementById("tableAbsensiSubBody").innerHTML = db.absensiSub.map(r => `
+        <tr class="hover:bg-slate-50">
+          <td class="py-2.5 px-3 font-semibold text-slate-800">${r.Date}<br><span class="text-[10px] text-slate-400 font-mono">${r.ID}</span></td>
+          <td class="py-2.5 px-3 font-bold text-slate-900">${r.Nama_Pegawai}</td>
+          <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-100 text-teal-800">${r.Bidang}</span></td>
+          <td class="py-2.5 px-3">${r.Status}</td>
+          <td class="py-2.5 px-3 text-slate-600">${r.Catatan}</td>
+        </tr>
+      `).join('');
+
+      // 3. Timbangan Table
+      document.getElementById("tableTimbanganBody").innerHTML = db.timbangan.map(r => `
+        <tr class="hover:bg-slate-50">
+          <td class="py-2.5 px-3 font-semibold text-slate-800">${r.Date}<br><span class="text-[10px] text-slate-400 font-mono">${r.ID}</span></td>
+          <td class="py-2.5 px-3 font-bold ${r.Jenis_Sampah==='Organik'?'text-emerald-700':r.Jenis_Sampah==='Botol'?'text-sky-700':'text-amber-700'}">${r.Jenis_Sampah}</td>
+          <td class="py-2.5 px-3 font-mono font-bold text-slate-900">${r.Berat_KG} KG</td>
+          <td class="py-2.5 px-3">${r.Petugas}</td>
+          <td class="py-2.5 px-3 text-slate-600">${r.Catatan}</td>
+        </tr>
+      `).join('');
+
+      // 4. Produk Table
+      document.getElementById("tableProdukBody").innerHTML = db.produk.map(r => `
+        <tr class="hover:bg-slate-50">
+          <td class="py-2.5 px-3 font-semibold text-slate-800">${r.Date}<br><span class="text-[10px] text-slate-400 font-mono">${r.ID}</span></td>
+          <td class="py-2.5 px-3 font-bold text-purple-800">${r.Jenis_Produk}</td>
+          <td class="py-2.5 px-3 font-mono font-bold text-slate-900">${r.Jumlah} ${r.Satuan}</td>
+          <td class="py-2.5 px-3">${r.Petugas}</td>
+          <td class="py-2.5 px-3 text-slate-600">${r.Catatan}</td>
+        </tr>
+      `).join('');
+
+      // 5. Admin Master Pegawai Table
+      const masterBody = document.getElementById("tableMasterPegawaiBody");
+      if (masterBody) {
+        masterBody.innerHTML = db.pegawai.map(p => `
+          <tr class="hover:bg-slate-50">
+            <td class="py-2.5 px-3 font-mono font-bold text-slate-700">${p.ID_Pegawai}</td>
+            <td class="py-2.5 px-3 font-semibold text-slate-900">${p.Nama_Pegawai}</td>
+            <td class="py-2.5 px-3 text-right">
+              <button onclick="handleDeletePegawai('${p.ID_Pegawai}')" class="text-rose-600 hover:text-rose-800 font-bold text-xs p-1">Hapus</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // Update Dashboard KPIs
+      const totalSampah = db.timbangan.reduce((acc, t) => acc + (t.Berat_KG || 0), 0);
+      const totalKompos = db.produk.filter(p => p.Jenis_Produk === "Pupuk Kompos").reduce((acc, p) => acc + (p.Jumlah || 0), 0);
+      const totalLindi = db.produk.filter(p => p.Jenis_Produk === "Air lindi").reduce((acc, p) => acc + (p.Jumlah || 0), 0);
+      const hadirCount = db.absensiUmum.filter(a => a.Status_Kehadiran === "Hadir").length;
+
+      document.getElementById("cardTotalSampah").innerHTML = `${totalSampah.toFixed(1)} <span class="text-sm font-bold text-emerald-700">KG</span>`;
+      document.getElementById("cardTotalKompos").innerHTML = `${totalKompos} <span class="text-sm font-bold text-amber-700">KG</span>`;
+      document.getElementById("cardTotalLindi").innerHTML = `${totalLindi} <span class="text-sm font-bold text-blue-700">Liter</span>`;
+      document.getElementById("cardKehadiran").innerHTML = `${hadirCount} Petugas <span class="text-xs font-bold text-purple-700">(Hadir)</span>`;
+    }
+
+    // Admin Verification ("dead4left")
+    function handleVerifyAdmin(e) {
+      e.preventDefault();
+      const pass = document.getElementById("adminPasswordInput").value;
+      if (pass === ADMIN_PASSWORD) {
+        unlockAdmin();
+      } else {
+        document.getElementById("adminPassError").classList.remove("hidden");
+      }
+    }
+
+    function handleModalVerifyAdmin(e) {
+      e.preventDefault();
+      const pass = document.getElementById("modalAdminPassInput").value;
+      if (pass === ADMIN_PASSWORD) {
+        closeModal('modalAdminLogin');
+        unlockAdmin();
+        switchTab('tab-admin');
+      } else {
+        alert("Password admin salah! Silakan gunakan: dead4left");
+      }
+    }
+
+    function unlockAdmin() {
+      isAdminAuthenticated = true;
+      document.getElementById("adminLockedView").classList.add("hidden");
+      document.getElementById("adminUnlockedView").classList.remove("hidden");
+      document.getElementById("adminStatusContainer").innerHTML = `
+        <div class="flex items-center gap-1.5 bg-amber-400 text-slate-950 font-bold px-3 py-1.5 rounded-xl text-xs">
+          <span>🛡️ Admin Aktif</span>
+          <button onclick="logoutAdmin()" class="ml-1 text-slate-950 hover:text-red-700 font-black">&times;</button>
+        </div>
+      `;
+      renderAllTables();
+    }
+
+    function logoutAdmin() {
+      isAdminAuthenticated = false;
+      document.getElementById("adminLockedView").classList.remove("hidden");
+      document.getElementById("adminUnlockedView").classList.add("hidden");
+      document.getElementById("adminStatusContainer").innerHTML = `
+        <button onclick="openModal('modalAdminLogin')" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-800 hover:bg-emerald-700 border border-emerald-500/60 text-xs text-amber-200 hover:text-white font-bold transition shadow-sm">
+          <span>🛡️ Login Admin</span>
+        </button>
+      `;
+    }
+
+    function handleAddPegawai() {
+      const name = document.getElementById("newPegawaiNameInput").value.trim();
+      const id = document.getElementById("newPegawaiIdInput").value.trim() || ("PEG-" + String(db.pegawai.length + 1).padStart(3, "0"));
+      if (!name) return alert("Nama pegawai tidak boleh kosong!");
+
+      db.pegawai.push({ ID_Pegawai: id, Nama_Pegawai: name });
+      document.getElementById("newPegawaiNameInput").value = "";
+      document.getElementById("newPegawaiIdInput").value = "";
+      populatePegawaiDropdowns();
+      renderAllTables();
+      alert("Pegawai " + name + " berhasil ditambahkan!");
+    }
+
+    function handleDeletePegawai(id) {
+      if (confirm("Yakin ingin menghapus pegawai ID " + id + "?")) {
+        db.pegawai = db.pegawai.filter(p => p.ID_Pegawai !== id);
+        populatePegawaiDropdowns();
+        renderAllTables();
+      }
+    }
+
+    // Modal Helpers
+    function openModal(id) {
+      document.getElementById(id).classList.remove("hidden");
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.add("hidden");
+    }
+  </script>
+</body>
+</html>

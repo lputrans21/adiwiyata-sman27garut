@@ -1,0 +1,211 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1100" width="100%" height="100%">
+  <defs>
+    <!-- Filter for slight crispness -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <g id="sman27-garut-official-logo">
+    <!-- 1. BLUE SHIELD BACKGROUND -->
+    <!-- Outer Shield with Black Outline -->
+    <path d="M 185 85 
+             L 815 85 
+             L 815 765 
+             L 500 965 
+             L 185 765 Z" 
+          fill="#3194dc" 
+          stroke="#101010" 
+          stroke-width="16" 
+          stroke-linejoin="round"/>
+
+    <!-- Inner White Shield Border Line -->
+    <path d="M 215 115 
+             L 785 115 
+             L 785 745 
+             L 500 925 
+             L 215 745 Z" 
+          fill="none" 
+          stroke="#ffffff" 
+          stroke-width="14" 
+          stroke-linejoin="round"/>
+
+    <!-- TOP TEXT: CETAK -->
+    <text x="500" y="195" 
+          text-anchor="middle" 
+          fill="#ffffff" 
+          font-family="Arial, Helvetica, sans-serif" 
+          font-weight="900" 
+          font-size="88" 
+          letter-spacing="4">CETAK</text>
+
+    <!-- 2. WINGS (SAYAP) LEFT & RIGHT -->
+    <!-- Left Wing -->
+    <g id="left-wing">
+      <!-- Wing Outer Outline & Fill -->
+      <path d="M 400 480 
+               C 280 430, 150 330, 105 75 
+               C 100 160, 130 290, 220 370 
+               C 130 310, 115 220, 115 190 
+               C 125 330, 220 440, 380 500 
+               C 210 440, 155 350, 145 320 
+               C 170 430, 270 515, 390 535 
+               Z" 
+            fill="#ffffff" 
+            stroke="#101010" 
+            stroke-width="10" 
+            stroke-linejoin="round"/>
+      <!-- Wing feather lines -->
+      <path d="M 105 75 C 130 250, 250 420, 480 520" fill="none" stroke="#101010" stroke-width="8"/>
+      <path d="M 125 210 C 170 330, 280 460, 450 535" fill="none" stroke="#101010" stroke-width="8"/>
+      <path d="M 155 330 C 210 420, 310 490, 440 550" fill="none" stroke="#101010" stroke-width="8"/>
+    </g>
+
+    <!-- Right Wing -->
+    <g id="right-wing">
+      <path d="M 600 480 
+               C 720 430, 850 330, 895 75 
+               C 900 160, 870 290, 780 370 
+               C 870 310, 885 220, 885 190 
+               C 875 330, 780 440, 620 500 
+               C 790 440, 845 350, 855 320 
+               C 830 430, 730 515, 610 535 
+               Z" 
+            fill="#ffffff" 
+            stroke="#101010" 
+            stroke-width="10" 
+            stroke-linejoin="round"/>
+      <!-- Wing feather lines -->
+      <path d="M 895 75 C 870 250, 750 420, 520 520" fill="none" stroke="#101010" stroke-width="8"/>
+      <path d="M 875 210 C 830 330, 720 460, 550 535" fill="none" stroke="#101010" stroke-width="8"/>
+      <path d="M 845 330 C 790 420, 690 490, 560 550" fill="none" stroke="#101010" stroke-width="8"/>
+    </g>
+
+    <!-- 3. CENTER EMBLEM: CIRCULAR MOUNTAINS, WAVES, CRESCENT -->
+    <!-- Circular Landscape Base -->
+    <circle cx="500" cy="460" r="135" fill="#4bae4f" stroke="#101010" stroke-width="10"/>
+
+    <!-- Mountain Silhouette (Black Mountains) -->
+    <path d="M 368 470 
+             L 410 420 
+             L 450 450 
+             L 500 375 
+             L 550 450 
+             L 590 420 
+             L 632 470 
+             L 632 540 
+             L 368 540 Z" 
+          fill="#111111"/>
+
+    <!-- Blue Lake & White Waves below mountain -->
+    <path d="M 374 485 
+             C 410 480, 440 500, 500 490 
+             C 560 480, 590 500, 626 485 
+             L 626 550 
+             C 590 575, 550 590, 500 590 
+             C 450 590, 410 575, 374 550 Z" 
+          fill="#29b6f6"/>
+
+    <!-- Wave lines -->
+    <path d="M 385 505 Q 440 485 500 505 T 615 505" fill="none" stroke="#ffffff" stroke-width="6"/>
+    <path d="M 395 528 Q 450 508 500 528 T 605 528" fill="none" stroke="#ffffff" stroke-width="6"/>
+    <path d="M 420 550 Q 460 535 500 550 T 580 550" fill="none" stroke="#ffffff" stroke-width="6"/>
+
+    <!-- Crescent Moon (Bulan Sabit Kuning) -->
+    <path d="M 500 315 
+             A 145 145 0 1 0 635 480 
+             A 100 100 0 1 1 500 315 Z" 
+          fill="#fff124" 
+          stroke="#101010" 
+          stroke-width="10"/>
+
+    <!-- 4. OPEN BOOK & FOUNTAIN PEN NIB (PENA) -->
+    <!-- Open Book Base under pen -->
+    <path d="M 420 575 L 500 610 L 580 575 L 580 705 L 500 730 L 420 705 Z" 
+          fill="#8e9094" 
+          stroke="#101010" 
+          stroke-width="10"/>
+    <path d="M 500 610 L 500 730" stroke="#101010" stroke-width="10"/>
+    <path d="M 430 700 L 500 720 L 570 700 L 570 715 L 500 735 L 430 715 Z" fill="#111111"/>
+
+    <!-- Vertical Pen Nib (Ujung Pena) -->
+    <path d="M 482 680 
+             L 482 410 
+             L 500 375 
+             L 518 410 
+             L 518 680 
+             L 500 715 Z" 
+          fill="#37474f" 
+          stroke="#101010" 
+          stroke-width="8"/>
+    
+    <!-- Pen Center Line & Hole -->
+    <line x1="500" y1="410" x2="500" y2="670" stroke="#101010" stroke-width="6"/>
+    <circle cx="500" cy="670" r="8" fill="#ffb300" stroke="#101010" stroke-width="4"/>
+
+    <!-- 5. FLAME, STAR & TOGA CAP ON TOP -->
+    <!-- Yellow/Orange Star and Torch Flame -->
+    <path d="M 500 380 
+             L 435 300 
+             C 450 250, 490 230, 500 230 
+             C 525 240, 560 280, 565 310 
+             C 540 330, 515 320, 500 380 Z" 
+          fill="#ff9800" 
+          stroke="#101010" 
+          stroke-width="8"/>
+
+    <!-- Red Inner Flame -->
+    <path d="M 500 360 
+             C 460 320, 440 260, 490 240 
+             C 475 270, 485 300, 500 360 Z" 
+          fill="#e53935" 
+          stroke="#101010" 
+          stroke-width="6"/>
+
+    <!-- Small Red Star on upper left flame tip -->
+    <polygon points="455,235 460,248 474,248 463,256 467,269 455,261 443,269 447,256 436,248 450,248" 
+             fill="#d32f2f" 
+             stroke="#101010" 
+             stroke-width="4"/>
+
+    <!-- Graduation Mortarboard Toga Cap on upper right -->
+    <polygon points="530,265 548,255 566,265 548,275" fill="#111111" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="530" cy="280" r="16" fill="#f4511e" stroke="#101010" stroke-width="6"/>
+    <polygon points="518,270 535,262 552,270 535,278" fill="#111111"/>
+
+    <!-- 6. RED RIBBON BANNER: SMAN 27 GARUT -->
+    <!-- Ribbon Left Swallowtail -->
+    <polygon points="125,740 6,795 85,845 2,895 125,895" 
+             fill="#d32f2f" 
+             stroke="#101010" 
+             stroke-width="12" 
+             stroke-linejoin="round"/>
+    <!-- Shadow fold left -->
+    <polygon points="125,875 185,875 185,915" fill="#5c0000" stroke="#101010" stroke-width="6"/>
+
+    <!-- Ribbon Right Swallowtail -->
+    <polygon points="875,740 994,795 915,845 998,895 875,895" 
+             fill="#d32f2f" 
+             stroke="#101010" 
+             stroke-width="12" 
+             stroke-linejoin="round"/>
+    <!-- Shadow fold right -->
+    <polygon points="875,875 815,875 815,915" fill="#5c0000" stroke="#101010" stroke-width="6"/>
+
+    <!-- Main Red Ribbon Center Bar -->
+    <rect x="125" y="740" width="750" height="135" rx="6" 
+          fill="#e51a24" 
+          stroke="#101010" 
+          stroke-width="14" 
+          stroke-linejoin="round"/>
+
+    <!-- TEXT: SMAN 27 GARUT -->
+    <text x="500" y="838" 
+          text-anchor="middle" 
+          fill="#ffffff" 
+          font-family="'Impact', 'Arial Black', sans-serif" 
+          font-weight="900" 
+          font-size="94" 
+          letter-spacing="5">SMAN 27 GARUT</text>
+  </g>
+</svg>
