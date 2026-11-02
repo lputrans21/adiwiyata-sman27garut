@@ -13,7 +13,7 @@
  */
 
 // >>> TEMPELKAN URL DEPLOYMENT GOOGLE APPS SCRIPT ANDA DI SINI <<<
-const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz_GANTI_DENGAN_DEPLOYMENT_ID_ANDA/exec";
+const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwCovXVDhvC05ppLUfnfHYsLs7wC070aNVXdF8to8mpKQHLvTUUdLyzlpLdI5ey2aI/exec";
 
 // Password Admin Resmi SMAN 27 Garut
 const ADMIN_PASSWORD = "dead4left";
