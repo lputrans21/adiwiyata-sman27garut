@@ -228,17 +228,18 @@ export const AdminPanelView: React.FC<AdminPanelViewProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={() => {
-              if (window.confirm('Reset data lokal ke sampel bawaan SMAN 27 Garut?')) {
+              if (window.confirm('Reset data lokal ke master 20 siswa resmi SMAN 27 Garut dan kosongkan catatan transaksi?')) {
                 onResetDefaults();
-                setActionNotice('Data berhasil di-reset ke nilai default.');
+                setActionNotice('Data lokal berhasil di-reset ke kondisi awal (Master 20 Siswa SMAN 27 Garut).');
               }
             }}
             className="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold text-slate-200 transition flex items-center gap-1.5"
-            title="Reset ke sampel default"
+            title="Reset ke master siswa resmi"
           >
             <RotateCcw className="w-3.5 h-3.5" />
-            <span>Reset Default</span>
+            <span>Reset Data</span>
           </button>
+
           <button
             onClick={onLogout}
             className="px-3.5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition flex items-center gap-1.5 shadow"

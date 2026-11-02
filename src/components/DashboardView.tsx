@@ -67,17 +67,19 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
   const totalPetugas = filteredAbsensi.length;
   const hadirCount = kehadiranSummary.Hadir;
-  const attendanceRate = totalPetugas > 0 ? Math.round((hadirCount / totalPetugas) * 100) : 100;
+  const attendanceRate = totalPetugas > 0 ? Math.round((hadirCount / totalPetugas) * 100) : 0;
 
   // Percentage for waste breakdown
   const botolKg = timbanganSummary.breakdown['Botol'] || 0;
   const plastikKg = timbanganSummary.breakdown['Plastik Halus'] || 0;
   const organikKg = timbanganSummary.breakdown['Organik'] || 0;
-  const totalKg = timbanganSummary.totalKg || 1; // avoid division by 0
+  const hasWasteData = timbanganSummary.totalKg > 0;
+  const totalKg = hasWasteData ? timbanganSummary.totalKg : 1; // avoid division by 0
 
-  const botolPct = Math.round((botolKg / totalKg) * 100);
-  const plastikPct = Math.round((plastikKg / totalKg) * 100);
-  const organikPct = Math.round((organikKg / totalKg) * 100);
+  const botolPct = hasWasteData ? Math.round((botolKg / totalKg) * 100) : 0;
+  const plastikPct = hasWasteData ? Math.round((plastikKg / totalKg) * 100) : 0;
+  const organikPct = hasWasteData ? Math.round((organikKg / totalKg) * 100) : 0;
+
 
   return (
     <div className="space-y-6">
@@ -271,15 +273,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </span>
               <div className="mt-2 flex items-baseline gap-1.5">
                 <span className="text-3xl font-black text-purple-950 font-mono">
-                  {attendanceRate}%
+                  {totalPetugas > 0 ? `${attendanceRate}%` : '0%'}
                 </span>
                 <span className="text-xs font-semibold text-purple-700">
-                  ({hadirCount} Hadir)
+                  {totalPetugas > 0 ? `(${hadirCount} Hadir)` : '(0 Hadir)'}
                 </span>
               </div>
               <p className="text-xs text-purple-600 mt-1">
-                {kehadiranSummary.Izin} Izin • {kehadiranSummary.Sakit} Sakit
+                {totalPetugas > 0
+                  ? `${kehadiranSummary.Izin} Izin • ${kehadiranSummary.Sakit} Sakit`
+                  : 'Belum ada data presensi periode ini'}
               </p>
+
             </div>
             <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-700">
               <UserCheck className="w-6 h-6" />
@@ -320,23 +325,29 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </div>
 
           {/* Visual Progress Bar */}
-          <div className="h-4 w-full rounded-full bg-slate-100 flex overflow-hidden p-0.5 border border-slate-200/60 shadow-inner">
-            <div
-              style={{ width: `${Math.max(organikPct, 3)}%` }}
-              className="bg-emerald-500 transition-all duration-500 rounded-l-full"
-              title={`Organik: ${organikKg} KG (${organikPct}%)`}
-            />
-            <div
-              style={{ width: `${Math.max(botolPct, 3)}%` }}
-              className="bg-sky-500 transition-all duration-500"
-              title={`Botol: ${botolKg} KG (${botolPct}%)`}
-            />
-            <div
-              style={{ width: `${Math.max(plastikPct, 3)}%` }}
-              className="bg-amber-500 transition-all duration-500 rounded-r-full"
-              title={`Plastik Halus: ${plastikKg} KG (${plastikPct}%)`}
-            />
-          </div>
+          {hasWasteData ? (
+            <div className="h-4 w-full rounded-full bg-slate-100 flex overflow-hidden p-0.5 border border-slate-200/60 shadow-inner">
+              <div
+                style={{ width: `${Math.max(organikPct, 3)}%` }}
+                className="bg-emerald-500 transition-all duration-500 rounded-l-full"
+                title={`Organik: ${organikKg} KG (${organikPct}%)`}
+              />
+              <div
+                style={{ width: `${Math.max(botolPct, 3)}%` }}
+                className="bg-sky-500 transition-all duration-500"
+                title={`Botol: ${botolKg} KG (${botolPct}%)`}
+              />
+              <div
+                style={{ width: `${Math.max(plastikPct, 3)}%` }}
+                className="bg-amber-500 transition-all duration-500 rounded-r-full"
+                title={`Plastik Halus: ${plastikKg} KG (${plastikPct}%)`}
+              />
+            </div>
+          ) : (
+            <div className="h-5 w-full rounded-full bg-slate-100 flex items-center justify-center border border-slate-200/60 text-[11px] text-slate-400 font-medium">
+              Belum ada data penimbangan untuk periode ini
+            </div>
+          )}
 
           {/* Category breakdown items */}
           <div className="grid grid-cols-3 gap-3 mt-4">
@@ -346,7 +357,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <span>Organik</span>
               </div>
               <div className="text-lg font-black text-emerald-950 font-mono">{organikKg} <span className="text-xs font-normal">KG</span></div>
-              <div className="text-[11px] text-emerald-600 font-semibold">{organikPct}% dari total</div>
+              <div className="text-[11px] text-emerald-600 font-semibold">{hasWasteData ? `${organikPct}% dari total` : '-'}</div>
             </div>
 
             <div className="p-3 rounded-xl bg-sky-50 border border-sky-100 text-center">
@@ -355,7 +366,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <span>Botol</span>
               </div>
               <div className="text-lg font-black text-sky-950 font-mono">{botolKg} <span className="text-xs font-normal">KG</span></div>
-              <div className="text-[11px] text-sky-600 font-semibold">{botolPct}% dari total</div>
+              <div className="text-[11px] text-sky-600 font-semibold">{hasWasteData ? `${botolPct}% dari total` : '-'}</div>
             </div>
 
             <div className="p-3 rounded-xl bg-amber-50 border border-amber-100 text-center">
@@ -364,9 +375,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                 <span>Plastik Halus</span>
               </div>
               <div className="text-lg font-black text-amber-950 font-mono">{plastikKg} <span className="text-xs font-normal">KG</span></div>
-              <div className="text-[11px] text-amber-600 font-semibold">{plastikPct}% dari total</div>
+              <div className="text-[11px] text-amber-600 font-semibold">{hasWasteData ? `${plastikPct}% dari total` : '-'}</div>
             </div>
           </div>
+
         </div>
 
         {/* Produk Hasil Output Summary */}

@@ -71,6 +71,7 @@ export default function App() {
   };
 
   useEffect(() => {
+    DataService.cleanLegacyMockData();
     loadAllData();
     // Otomatis sinkronisasi data dari Google Sheets Spreadsheet
     DataService.syncFromRemote().then(res => {
@@ -79,6 +80,7 @@ export default function App() {
       }
     });
   }, []);
+
 
 
   // --- Handlers for Creation ---

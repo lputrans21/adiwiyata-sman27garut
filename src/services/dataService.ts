@@ -94,6 +94,38 @@ export class DataService {
     return null;
   }
 
+  static cleanLegacyMockData(): void {
+    try {
+      const storedPegawai = localStorage.getItem(STORAGE_KEYS.PEGAWAI);
+      if (storedPegawai && (storedPegawai.includes('Lucy Ega') || storedPegawai.includes('Asep Sunandar'))) {
+        localStorage.setItem(STORAGE_KEYS.PEGAWAI, JSON.stringify(INITIAL_PEGAWAI));
+      }
+
+      // Check for legacy mock transaction data
+      const storedTimbangan = localStorage.getItem(STORAGE_KEYS.TIMBANGAN);
+      if (storedTimbangan && (storedTimbangan.includes('TMB-3001') || storedTimbangan.includes('Asep Sunandar'))) {
+        localStorage.setItem(STORAGE_KEYS.TIMBANGAN, JSON.stringify([]));
+      }
+
+      const storedAbsensiUmum = localStorage.getItem(STORAGE_KEYS.ABSENSI_UMUM);
+      if (storedAbsensiUmum && (storedAbsensiUmum.includes('ABS-UMUM-1001') || storedAbsensiUmum.includes('Lucy Ega'))) {
+        localStorage.setItem(STORAGE_KEYS.ABSENSI_UMUM, JSON.stringify([]));
+      }
+
+      const storedAbsensiSub = localStorage.getItem(STORAGE_KEYS.ABSENSI_SUB);
+      if (storedAbsensiSub && (storedAbsensiSub.includes('ABS-SUB-2001') || storedAbsensiSub.includes('Dewi Sartika'))) {
+        localStorage.setItem(STORAGE_KEYS.ABSENSI_SUB, JSON.stringify([]));
+      }
+
+      const storedProduk = localStorage.getItem(STORAGE_KEYS.PRODUK);
+      if (storedProduk && (storedProduk.includes('PRD-4001') || storedProduk.includes('Air lindi'))) {
+        localStorage.setItem(STORAGE_KEYS.PRODUK, JSON.stringify([]));
+      }
+    } catch (e) {
+      console.warn('Error cleaning legacy mock data:', e);
+    }
+  }
+
   static async syncFromRemote(): Promise<{ success: boolean; message: string; count?: number }> {
     const url = this.getApiUrl();
     if (!url) return { success: false, message: 'URL Google Apps Script belum diset' };
@@ -106,20 +138,96 @@ export class DataService {
         const data = await res.json();
         if (data && data.success) {
           if (Array.isArray(data.masterPegawai) && data.masterPegawai.length > 0) {
-            this.setMasterPegawai(data.masterPegawai);
+            // Verify if masterPegawai from remote doesn't have old mock names
+            const hasLegacyNames = data.masterPegawai.some((p: any) =>
+              p.Nama_Pegawai?.includes('Lucy Ega') || p.Nama_Pegawai?.includes('Asep Sunandar')
+            );
+            if (!hasLegacyNames) {
+              this.setMasterPegawai(data.masterPegawai);
+            } else {
+              this.setMasterPegawai(INITIAL_PEGAWAI);
+            }
           }
-          if (Array.isArray(data.absensiUmum) && data.absensiUmum.length > 0) {
-            this.setStored(STORAGE_KEYS.ABSENSI_UMUM, data.absensiUmum);
+
+          if (Array.isArray(data.absensiUmum)) {
+            const cleanAbsensiUmum = data.absensiUmum
+              .filter((r: any) => {
+                const name = String(r.Nama_Pegawai || '');
+                return !name.includes('Lucy Ega') && !name.includes('Asep Sunandar') && r.ID !== 'ABS-UMUM-1001';
+              })
+              .map((r: any) => ({
+                ID: r.ID || r.Timestamp || generateRecordId('ABS-UMUM'),
+                Timestamp: String(r.Timestamp || ''),
+                Date: String(r.Date || ''),
+                Nama_Pegawai: String(r.Nama_Pegawai || ''),
+                Status_Kehadiran: r.Status_Kehadiran || 'Hadir',
+                Catatan: String(r.Catatan || '-'),
+                Catatan_Khusus_Admin: String(r.Catatan_Khusus_Admin || r.Catatan_Admin || '')
+              }));
+            this.setStored(STORAGE_KEYS.ABSENSI_UMUM, cleanAbsensiUmum);
           }
-          if (Array.isArray(data.absensiSubBidang) && data.absensiSubBidang.length > 0) {
-            this.setStored(STORAGE_KEYS.ABSENSI_SUB, data.absensiSubBidang);
+
+          if (Array.isArray(data.absensiSubBidang)) {
+            const cleanAbsensiSub = data.absensiSubBidang
+              .filter((r: any) => {
+                const name = String(r.Nama_Pegawai || '');
+                return !name.includes('Lucy Ega') && !name.includes('Asep Sunandar') && r.ID !== 'ABS-SUB-2001';
+              })
+              .map((r: any) => ({
+                ID: r.ID || r.Timestamp || generateRecordId('ABS-SUB'),
+                Timestamp: String(r.Timestamp || ''),
+                Date: String(r.Date || ''),
+                Nama_Pegawai: String(r.Nama_Pegawai || ''),
+                Bidang: r.Bidang || 'Organik',
+                Status: String(r.Status || 'Aktif'),
+                Catatan: String(r.Catatan || '-'),
+                Catatan_Khusus_Admin: String(r.Catatan_Khusus_Admin || r.Catatan_Admin || '')
+              }));
+            this.setStored(STORAGE_KEYS.ABSENSI_SUB, cleanAbsensiSub);
           }
-          if (Array.isArray(data.timbanganSampah) && data.timbanganSampah.length > 0) {
-            this.setStored(STORAGE_KEYS.TIMBANGAN, data.timbanganSampah);
+
+          if (Array.isArray(data.timbanganSampah)) {
+            const cleanTimbangan = data.timbanganSampah
+              .filter((r: any) => {
+                const pet = String(r.Petugas || '');
+                const js = String(r.Jenis_Sampah || '');
+                const dt = String(r.Date || '');
+                // Filter out mock names or shifted rows
+                return !pet.includes('Asep Sunandar') && r.ID !== 'TMB-3001' && js !== dt;
+              })
+              .map((r: any) => ({
+                ID: r.ID || r.Timestamp || generateRecordId('TMB'),
+                Timestamp: String(r.Timestamp || ''),
+                Date: String(r.Date || ''),
+                Jenis_Sampah: String(r.Jenis_Sampah || 'Organik'),
+                Berat_KG: Number(r.Berat_KG) || 0,
+                Petugas: String(r.Petugas || '-'),
+                Catatan: String(r.Catatan || '-'),
+                Catatan_Khusus_Admin: String(r.Catatan_Khusus_Admin || r.Catatan_Admin || '')
+              }));
+            this.setStored(STORAGE_KEYS.TIMBANGAN, cleanTimbangan);
           }
-          if (Array.isArray(data.produkHasil) && data.produkHasil.length > 0) {
-            this.setStored(STORAGE_KEYS.PRODUK, data.produkHasil);
+
+          if (Array.isArray(data.produkHasil)) {
+            const cleanProduk = data.produkHasil
+              .filter((r: any) => {
+                const pet = String(r.Petugas || '');
+                return !pet.includes('Asep Sunandar') && r.ID !== 'PRD-4001';
+              })
+              .map((r: any) => ({
+                ID: r.ID || r.Timestamp || generateRecordId('PRD'),
+                Timestamp: String(r.Timestamp || ''),
+                Date: String(r.Date || ''),
+                Jenis_Produk: String(r.Jenis_Produk || 'Pupuk Kompos'),
+                Satuan: String(r.Satuan || 'Kilogram'),
+                Jumlah: Number(r.Jumlah) || 0,
+                Petugas: String(r.Petugas || '-'),
+                Catatan: String(r.Catatan || '-'),
+                Catatan_Khusus_Admin: String(r.Catatan_Khusus_Admin || r.Catatan_Admin || '')
+              }));
+            this.setStored(STORAGE_KEYS.PRODUK, cleanProduk);
           }
+
           return {
             success: true,
             message: `Tersinkronisasi dengan Spreadsheet Google Sheets! (${data.masterPegawai?.length || 0} Pegawai)`,
@@ -135,10 +243,17 @@ export class DataService {
   }
 
 
+
   // --- Master Pegawai ---
   static getMasterPegawai(): MasterPegawai[] {
-    return this.getStored<MasterPegawai[]>(STORAGE_KEYS.PEGAWAI, INITIAL_PEGAWAI);
+    const list = this.getStored<MasterPegawai[]>(STORAGE_KEYS.PEGAWAI, INITIAL_PEGAWAI);
+    if (!Array.isArray(list) || list.length === 0 || list.some(p => p.Nama_Pegawai?.includes('Lucy Ega') || p.Nama_Pegawai?.includes('Asep Sunandar'))) {
+      this.setMasterPegawai(INITIAL_PEGAWAI);
+      return INITIAL_PEGAWAI;
+    }
+    return list;
   }
+
 
   static setMasterPegawai(list: MasterPegawai[]): void {
     this.setStored(STORAGE_KEYS.PEGAWAI, list);
@@ -202,7 +317,12 @@ export class DataService {
 
   // --- Sub-Menu 1: Absensi Umum ---
   static getAbsensiUmum(): AbsensiUmumRecord[] {
-    return this.getStored<AbsensiUmumRecord[]>(STORAGE_KEYS.ABSENSI_UMUM, INITIAL_ABSENSI_UMUM);
+    const list = this.getStored<AbsensiUmumRecord[]>(STORAGE_KEYS.ABSENSI_UMUM, INITIAL_ABSENSI_UMUM);
+    if (!Array.isArray(list) || list.some(r => r.ID === 'ABS-UMUM-1001' || String(r.Nama_Pegawai || '').includes('Lucy Ega') || String(r.Nama_Pegawai || '').includes('Asep Sunandar'))) {
+      this.setStored(STORAGE_KEYS.ABSENSI_UMUM, []);
+      return [];
+    }
+    return list;
   }
 
   static createAbsensiUmum(payload: {
@@ -237,7 +357,12 @@ export class DataService {
 
   // --- Sub-Menu 2: Absensi Sub-Bidang ---
   static getAbsensiSub(): AbsensiSubBidangRecord[] {
-    return this.getStored<AbsensiSubBidangRecord[]>(STORAGE_KEYS.ABSENSI_SUB, INITIAL_ABSENSI_SUB);
+    const list = this.getStored<AbsensiSubBidangRecord[]>(STORAGE_KEYS.ABSENSI_SUB, INITIAL_ABSENSI_SUB);
+    if (!Array.isArray(list) || list.some(r => r.ID === 'ABS-SUB-2001' || String(r.Nama_Pegawai || '').includes('Asep Sunandar'))) {
+      this.setStored(STORAGE_KEYS.ABSENSI_SUB, []);
+      return [];
+    }
+    return list;
   }
 
   static createAbsensiSub(payload: {
@@ -275,7 +400,12 @@ export class DataService {
 
   // --- Sub-Menu 3: Timbangan Sampah ---
   static getTimbangan(): TimbanganSampahRecord[] {
-    return this.getStored<TimbanganSampahRecord[]>(STORAGE_KEYS.TIMBANGAN, INITIAL_TIMBANGAN);
+    const list = this.getStored<TimbanganSampahRecord[]>(STORAGE_KEYS.TIMBANGAN, INITIAL_TIMBANGAN);
+    if (!Array.isArray(list) || list.some(r => r.ID === 'TMB-3001' || String(r.Petugas || '').includes('Asep Sunandar') || String(r.Jenis_Sampah || '') === String(r.Date || ''))) {
+      this.setStored(STORAGE_KEYS.TIMBANGAN, []);
+      return [];
+    }
+    return list;
   }
 
   static createTimbangan(payload: {
@@ -313,8 +443,15 @@ export class DataService {
 
   // --- Sub-Menu 4: Produk Hasil ---
   static getProduk(): ProdukHasilRecord[] {
-    return this.getStored<ProdukHasilRecord[]>(STORAGE_KEYS.PRODUK, INITIAL_PRODUK);
+    const list = this.getStored<ProdukHasilRecord[]>(STORAGE_KEYS.PRODUK, INITIAL_PRODUK);
+    if (!Array.isArray(list) || list.some(r => r.ID === 'PRD-4001' || String(r.Petugas || '').includes('Asep Sunandar'))) {
+      this.setStored(STORAGE_KEYS.PRODUK, []);
+      return [];
+    }
+    return list;
   }
+
+
 
   static createProduk(payload: {
     jenisProduk: 'Air lindi' | 'Pupuk Kompos' | 'Barang Daur Ulang' | string;

@@ -97,3 +97,25 @@ test('generateRecordId produces non-empty ID with prefix', () => {
   assert.match(id1, /^TMB-\d{6}-\d{4}$/);
   assert.notEqual(id1, id2);
 });
+
+test('Summary functions handle empty records gracefully', () => {
+  const emptyTimbangan = calculateTimbanganSummary([]);
+  assert.equal(emptyTimbangan.totalKg, 0);
+  assert.equal(emptyTimbangan.count, 0);
+  assert.equal(emptyTimbangan.breakdown['Botol'], 0);
+  assert.equal(emptyTimbangan.breakdown['Organik'], 0);
+  assert.equal(emptyTimbangan.breakdown['Plastik Halus'], 0);
+
+  const emptyProduk = calculateProdukSummary([]);
+  assert.equal(emptyProduk.totalRecords, 0);
+  assert.equal(emptyProduk.summary['Air lindi'].jumlah, 0);
+  assert.equal(emptyProduk.summary['Pupuk Kompos'].jumlah, 0);
+  assert.equal(emptyProduk.summary['Barang Daur Ulang'].jumlah, 0);
+
+  const emptyKehadiran = calculateKehadiranSummary([]);
+  assert.equal(emptyKehadiran.Hadir, 0);
+  assert.equal(emptyKehadiran.Izin, 0);
+  assert.equal(emptyKehadiran.Sakit, 0);
+  assert.equal(emptyKehadiran.Alpa, 0);
+});
+

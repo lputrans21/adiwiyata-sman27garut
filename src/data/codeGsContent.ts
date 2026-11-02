@@ -97,18 +97,34 @@ function initSheets() {
     }
   });
 
-  // Isi data awal Master Pegawai jika masih kosong
+  // Isi data awal Master Pegawai (20 Siswa Resmi SMAN 27 Garut) jika masih kosong
   const masterSheet = ss.getSheetByName(SHEETS.MASTER_PEGAWAI);
   if (masterSheet.getLastRow() <= 1) {
-    const dummyPegawai = [
-      ["PEG-001", "Drs. Lucy Ega Suganda"],
-      ["PEG-002", "Asep Sunandar, S.Pd"],
-      ["PEG-003", "Siti Nurhaliza, M.Pd"],
-      ["PEG-004", "Rian Hidayat"],
-      ["PEG-005", "Dewi Sartika"]
+    const officialPegawai = [
+      ["PGW-001", "SAIRA AULIA"],
+      ["PGW-002", "GARSHELA PUTRI DERIS"],
+      ["PGW-003", "NAZWA DEANDRA KESHA AUNI"],
+      ["PGW-004", "VIKKA ALNABILLA"],
+      ["PGW-005", "FIKA RAHMA ARNIDA"],
+      ["PGW-006", "ZIRA ALMERA"],
+      ["PGW-007", "RAHMI MAULIDA"],
+      ["PGW-008", "DEWI RAHMA"],
+      ["PGW-009", "GARNISA NOVIYANTI"],
+      ["PGW-010", "LIA APRILIANI"],
+      ["PGW-011", "REVALINA AGUSTINA"],
+      ["PGW-012", "AMELIA KHUSUS KHOTIMAH"],
+      ["PGW-013", "MEIKA RAHMA WIDIANTI"],
+      ["PGW-014", "RIZKI RAMADHAN"],
+      ["PGW-015", "ALKHA PRAMUDYA"],
+      ["PGW-016", "DENISA FEBRIANTI"],
+      ["PGW-017", "AMIRA AMBAR RAMADHANI"],
+      ["PGW-018", "SISIL"],
+      ["PGW-019", "REFA CAHYANI"],
+      ["PGW-020", "METI PURNAMA SARI CAHYUNI"]
     ];
-    dummyPegawai.forEach(row => masterSheet.appendRow(row));
+    officialPegawai.forEach(row => masterSheet.appendRow(row));
   }
+
 
   Logger.log("✅ Inisialisasi Database Sheet Adiwiyata SMAN 27 Garut Berhasil!");
   return { success: true, message: "Database dan Sheet berhasil diinisialisasi" };
