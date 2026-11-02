@@ -24,8 +24,8 @@ export const APP_JS_SOURCE = `/**
  * 8. Tempelkan URL tersebut ke variabel GAS_WEB_APP_URL di bawah ini:
  */
 
-// >>> TEMPELKAN URL DEPLOYMENT GOOGLE APPS SCRIPT ANDA DI SINI <<<
-const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz_GANTI_DENGAN_DEPLOYMENT_ID_ANDA/exec";
+// >>> URL DEPLOYMENT GOOGLE APPS SCRIPT AKTIF SMAN 27 GARUT <<<
+const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwCovXVDhvC05ppLUfnfHYsLs7wC070aNVXdF8to8mpKQHLvTUUdLyzlpLdI5ey2aI/exec";
 
 // Password Admin Resmi SMAN 27 Garut
 const ADMIN_PASSWORD = "dead4left";

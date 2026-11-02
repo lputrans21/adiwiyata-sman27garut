@@ -169,6 +169,13 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
             </div>
 
+            {/* Live Google Sheets Connection Badge */}
+            <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-emerald-950/80 border border-emerald-500/60 text-[11px] text-emerald-300 font-semibold shadow-inner" title="Terhubung Realtime dengan Spreadsheet Google Sheets SMAN 27 Garut">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span className="font-bold text-white">Google Sheets</span>
+              <span className="text-[10px] text-emerald-300 hidden md:inline">Online</span>
+            </div>
+
             {/* Live Clock */}
             <div className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-950/60 border border-emerald-700/50 text-xs text-emerald-200 font-mono">
               <Clock className="w-3.5 h-3.5 text-emerald-400" />

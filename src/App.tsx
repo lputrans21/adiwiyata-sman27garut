@@ -72,7 +72,14 @@ export default function App() {
 
   useEffect(() => {
     loadAllData();
+    // Otomatis sinkronisasi data dari Google Sheets Spreadsheet
+    DataService.syncFromRemote().then(res => {
+      if (res.success) {
+        loadAllData();
+      }
+    });
   }, []);
+
 
   // --- Handlers for Creation ---
   const handleAddAbsensiUmum = (data: {

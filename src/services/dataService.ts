@@ -50,9 +50,11 @@ export class DataService {
     }
   }
 
+  static DEFAULT_GAS_URL = 'https://script.google.com/macros/s/AKfycbwCovXVDhvC05ppLUfnfHYsLs7wC070aNVXdF8to8mpKQHLvTUUdLyzlpLdI5ey2aI/exec';
+
   // --- Configuration ---
   static getApiUrl(): string {
-    return localStorage.getItem(STORAGE_KEYS.API_URL) || '';
+    return localStorage.getItem(STORAGE_KEYS.API_URL) || this.DEFAULT_GAS_URL;
   }
 
   static setApiUrl(url: string): void {
@@ -60,12 +62,78 @@ export class DataService {
   }
 
   static isLiveApiEnabled(): boolean {
-    return localStorage.getItem(STORAGE_KEYS.USE_LIVE_API) === 'true';
+    return localStorage.getItem(STORAGE_KEYS.USE_LIVE_API) !== 'false';
   }
 
   static setLiveApiEnabled(enabled: boolean): void {
     localStorage.setItem(STORAGE_KEYS.USE_LIVE_API, enabled ? 'true' : 'false');
   }
+
+  // --- Remote Google Apps Script Communication ---
+  static async sendRemote(action: string, payload: any = {}): Promise<any> {
+    const url = this.getApiUrl();
+    if (!url) return null;
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify({
+          action,
+          timestamp: new Date().toISOString(),
+          ...payload
+        })
+      });
+      if (res.ok) {
+        return await res.json();
+      }
+    } catch (e) {
+      console.warn(`[DataService] Gagal sinkronisasi remote (${action}):`, e);
+    }
+    return null;
+  }
+
+  static async syncFromRemote(): Promise<{ success: boolean; message: string; count?: number }> {
+    const url = this.getApiUrl();
+    if (!url) return { success: false, message: 'URL Google Apps Script belum diset' };
+    try {
+      const res = await fetch(`${url}?action=getAllData`, {
+        method: 'GET',
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.success) {
+          if (Array.isArray(data.masterPegawai) && data.masterPegawai.length > 0) {
+            this.setMasterPegawai(data.masterPegawai);
+          }
+          if (Array.isArray(data.absensiUmum) && data.absensiUmum.length > 0) {
+            this.setStored(STORAGE_KEYS.ABSENSI_UMUM, data.absensiUmum);
+          }
+          if (Array.isArray(data.absensiSubBidang) && data.absensiSubBidang.length > 0) {
+            this.setStored(STORAGE_KEYS.ABSENSI_SUB, data.absensiSubBidang);
+          }
+          if (Array.isArray(data.timbanganSampah) && data.timbanganSampah.length > 0) {
+            this.setStored(STORAGE_KEYS.TIMBANGAN, data.timbanganSampah);
+          }
+          if (Array.isArray(data.produkHasil) && data.produkHasil.length > 0) {
+            this.setStored(STORAGE_KEYS.PRODUK, data.produkHasil);
+          }
+          return {
+            success: true,
+            message: `Tersinkronisasi dengan Spreadsheet Google Sheets! (${data.masterPegawai?.length || 0} Pegawai)`,
+            count: data.masterPegawai?.length || 0
+          };
+        }
+      }
+    } catch (e: any) {
+      console.warn('[DataService] Sync error:', e);
+      return { success: false, message: e.message || 'Gagal tersambung ke Google Apps Script' };
+    }
+    return { success: false, message: 'Format respons tidak valid' };
+  }
+
 
   // --- Master Pegawai ---
   static getMasterPegawai(): MasterPegawai[] {
@@ -87,13 +155,19 @@ export class DataService {
     const current = this.getMasterPegawai();
 
     if (subAction === 'add') {
-      const id = payload.idPegawai || `PEG-${String(current.length + 1).padStart(3, '0')}`;
+      const id = payload.idPegawai || `PGW-${String(current.length + 1).padStart(3, '0')}`;
       const name = (payload.namaPegawai || '').trim();
       if (!name) return { success: false, message: 'Nama pegawai tidak boleh kosong!' };
 
       const newPegawai: MasterPegawai = { ID_Pegawai: id, Nama_Pegawai: name };
       const updated = [...current, newPegawai];
       this.setMasterPegawai(updated);
+      this.sendRemote('managePegawai', {
+        subAction: 'add',
+        namaPegawai: name,
+        idPegawai: id,
+        adminPassword: payload.adminPassword
+      });
       return { success: true, message: `Pegawai ${name} (${id}) berhasil ditambahkan.`, data: newPegawai };
     }
 
@@ -115,6 +189,11 @@ export class DataService {
         return { success: false, message: `Pegawai ID ${id} tidak ditemukan!` };
       }
       this.setMasterPegawai(updated);
+      this.sendRemote('managePegawai', {
+        subAction: 'delete',
+        idPegawai: id,
+        adminPassword: payload.adminPassword
+      });
       return { success: true, message: `Pegawai ID ${id} berhasil dihapus.` };
     }
 
@@ -144,6 +223,15 @@ export class DataService {
     };
     const updated = [newRecord, ...list];
     this.setStored(STORAGE_KEYS.ABSENSI_UMUM, updated);
+
+    // Kirim sinkronisasi remote ke Google Sheets via Apps Script
+    this.sendRemote('createAbsensiUmum', {
+      namaPegawai: payload.namaPegawai,
+      statusKehadiran: payload.statusKehadiran,
+      catatan: payload.catatan || '-',
+      date: newRecord.Date
+    });
+
     return newRecord;
   }
 
@@ -172,6 +260,16 @@ export class DataService {
     };
     const updated = [newRecord, ...list];
     this.setStored(STORAGE_KEYS.ABSENSI_SUB, updated);
+
+    // Kirim sinkronisasi remote ke Google Sheets via Apps Script
+    this.sendRemote('createAbsensiSubBidang', {
+      namaPegawai: payload.namaPegawai,
+      bidang: payload.bidang,
+      status: payload.status || 'Aktif',
+      catatan: payload.catatan || '-',
+      date: newRecord.Date
+    });
+
     return newRecord;
   }
 
@@ -200,6 +298,16 @@ export class DataService {
     };
     const updated = [newRecord, ...list];
     this.setStored(STORAGE_KEYS.TIMBANGAN, updated);
+
+    // Kirim sinkronisasi remote ke Google Sheets via Apps Script
+    this.sendRemote('createTimbanganSampah', {
+      jenisSampah: payload.jenisSampah,
+      beratKg: Number(payload.beratKg),
+      petugas: payload.petugas,
+      catatan: payload.catatan || '-',
+      date: newRecord.Date
+    });
+
     return newRecord;
   }
 
@@ -230,6 +338,17 @@ export class DataService {
     };
     const updated = [newRecord, ...list];
     this.setStored(STORAGE_KEYS.PRODUK, updated);
+
+    // Kirim sinkronisasi remote ke Google Sheets via Apps Script
+    this.sendRemote('createProdukHasil', {
+      jenisProduk: payload.jenisProduk,
+      satuan: payload.satuan,
+      jumlah: Number(payload.jumlah),
+      petugas: payload.petugas,
+      catatan: payload.catatan || '-',
+      date: newRecord.Date
+    });
+
     return newRecord;
   }
 
@@ -250,6 +369,7 @@ export class DataService {
       if (idx === -1) return { success: false, message: 'Record tidak ditemukan.' };
       records[idx] = { ...records[idx], ...updatedFields };
       this.setStored(STORAGE_KEYS.ABSENSI_UMUM, records);
+      this.sendRemote('updateRecord', { sheetName, recordId, fields: updatedFields, adminPassword });
       return { success: true, message: `Record ${recordId} berhasil diperbarui.` };
     }
 
@@ -259,6 +379,7 @@ export class DataService {
       if (idx === -1) return { success: false, message: 'Record tidak ditemukan.' };
       records[idx] = { ...records[idx], ...updatedFields };
       this.setStored(STORAGE_KEYS.ABSENSI_SUB, records);
+      this.sendRemote('updateRecord', { sheetName, recordId, fields: updatedFields, adminPassword });
       return { success: true, message: `Record ${recordId} berhasil diperbarui.` };
     }
 
@@ -268,6 +389,7 @@ export class DataService {
       if (idx === -1) return { success: false, message: 'Record tidak ditemukan.' };
       records[idx] = { ...records[idx], ...updatedFields };
       this.setStored(STORAGE_KEYS.TIMBANGAN, records);
+      this.sendRemote('updateRecord', { sheetName, recordId, fields: updatedFields, adminPassword });
       return { success: true, message: `Record ${recordId} berhasil diperbarui.` };
     }
 
@@ -277,6 +399,7 @@ export class DataService {
       if (idx === -1) return { success: false, message: 'Record tidak ditemukan.' };
       records[idx] = { ...records[idx], ...updatedFields };
       this.setStored(STORAGE_KEYS.PRODUK, records);
+      this.sendRemote('updateRecord', { sheetName, recordId, fields: updatedFields, adminPassword });
       return { success: true, message: `Record ${recordId} berhasil diperbarui.` };
     }
 
@@ -295,24 +418,28 @@ export class DataService {
     if (sheetName === 'Absensi_Umum') {
       const records = this.getAbsensiUmum().filter(r => r.ID !== recordId);
       this.setStored(STORAGE_KEYS.ABSENSI_UMUM, records);
+      this.sendRemote('deleteRecord', { sheetName, recordId, adminPassword });
       return { success: true, message: `Record ${recordId} berhasil dihapus.` };
     }
 
     if (sheetName === 'Absensi_SubBidang') {
       const records = this.getAbsensiSub().filter(r => r.ID !== recordId);
       this.setStored(STORAGE_KEYS.ABSENSI_SUB, records);
+      this.sendRemote('deleteRecord', { sheetName, recordId, adminPassword });
       return { success: true, message: `Record ${recordId} berhasil dihapus.` };
     }
 
     if (sheetName === 'Timbangan_Sampah') {
       const records = this.getTimbangan().filter(r => r.ID !== recordId);
       this.setStored(STORAGE_KEYS.TIMBANGAN, records);
+      this.sendRemote('deleteRecord', { sheetName, recordId, adminPassword });
       return { success: true, message: `Record ${recordId} berhasil dihapus.` };
     }
 
     if (sheetName === 'Produk_Hasil') {
       const records = this.getProduk().filter(r => r.ID !== recordId);
       this.setStored(STORAGE_KEYS.PRODUK, records);
+      this.sendRemote('deleteRecord', { sheetName, recordId, adminPassword });
       return { success: true, message: `Record ${recordId} berhasil dihapus.` };
     }
 
@@ -325,8 +452,10 @@ export class DataService {
     adminNote: string,
     adminPassword: string
   ): { success: boolean; message: string } {
+    this.sendRemote('updateAdminNote', { sheetName, recordId, adminNote, adminPassword });
     return this.updateRecord(sheetName, recordId, { Catatan_Khusus_Admin: adminNote }, adminPassword);
   }
+
 
   // --- Reset to Demo Defaults ---
   static resetToDefaults(): void {
